@@ -1,7 +1,6 @@
 import sys
-sys.path.append("../../")
-
 import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../human_body_prior/src"))
 import numpy as np
 import joblib 
 import trimesh  
@@ -21,7 +20,7 @@ from human_body_prior.body_model.body_model import BodyModel
 
 from manip.lafan1.utils import rotate_at_frame_w_obj 
 
-SMPLH_PATH = "/viscam/u/jiamanli/github/hm_interaction/smpl_all_models/smplh_amass"
+SMPLH_PATH = os.path.join(os.path.dirname(__file__), "../../data/processed_data/smpl_all_models/smplh_amass")
 
 def to_tensor(array, dtype=torch.float32):
     if not torch.is_tensor(array):
@@ -132,6 +131,7 @@ class CanoObjectTrajDataset(Dataset):
         self.window = window 
 
         self.use_object_splits = use_object_splits 
+        
         self.train_objects = ["largetable", "woodchair", "plasticbox", "largebox", "smallbox", "trashcan", "monitor", \
                     "floorlamp", "clothesstand"] 
         self.test_objects = ["smalltable", "whitechair", "suitcase", "tripod"]
@@ -480,7 +480,7 @@ class CanoObjectTrajDataset(Dataset):
         #     }
         #     torch.save(bps, self.bps_path)
         
-        self.bps = torch.load(self.bps_path)
+        self.bps = torch.load(self.bps_path, weights_only=True)
 
         self.bps_torch = bps_torch()
 

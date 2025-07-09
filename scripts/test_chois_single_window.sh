@@ -1,7 +1,7 @@
 python trainer_chois.py \
 --window=120 \
 --batch_size=32 \
---data_root_folder="./processed_data" \
+--data_root_folder="./data/processed_data" \
 --pretrained_model="./pretrained_models/model-10.pt" \
 --save_res_folder="./chois_single_window_results" \
 --input_first_human_pose \

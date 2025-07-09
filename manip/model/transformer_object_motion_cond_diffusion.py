@@ -292,7 +292,7 @@ class ObjectCondGaussianDiffusion(nn.Module):
         self.use_object_keypoints = use_object_keypoints 
 
         obj_feats_dim = 256 
-        d_input_feats = 2*d_feats+obj_feats_dim
+        d_input_feats = 2*d_feats+obj_feats_dim # 2*d_feats: initial state of human motion and object motion and noise plus bps embedding 
 
         self.denoise_fn = TransformerDiffusionModel(d_input_feats=d_input_feats, d_feats=d_feats, \
                     d_model=d_model, n_head=n_head, d_k=d_k, d_v=d_v, \
